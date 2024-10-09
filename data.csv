@@ -1,0 +1,6 @@
+sender,receiver,amount
+A,B,30
+B,C,20
+C,A,50
+A,D,60
+D,E,40

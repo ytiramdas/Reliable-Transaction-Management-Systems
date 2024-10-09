@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+service Paxos {
+  rpc HandleTransaction (Transaction) returns (CommitResponse);
+}
+
+message CommitResponse {
+  bool status = 1;
+}
+
+message Transaction {
+  string sender = 1;
+  string receiver = 2;
+  int32 amount = 3;
+}
