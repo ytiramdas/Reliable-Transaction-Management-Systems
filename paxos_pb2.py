@@ -24,17 +24,21 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0bpaxos.proto\" \n\x0e\x43ommitResponse\x12\x0e\n\x06status\x18\x01 \x01(\x08\"?\n\x0bTransaction\x12\x0e\n\x06sender\x18\x01 \x01(\t\x12\x10\n\x08receiver\x18\x02 \x01(\t\x12\x0e\n\x06\x61mount\x18\x03 \x01(\x05\x32;\n\x05Paxos\x12\x32\n\x11HandleTransaction\x12\x0c.Transaction\x1a\x0f.CommitResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0bpaxos.proto\"?\n\x0bTransaction\x12\x0e\n\x06sender\x18\x01 \x01(\t\x12\x10\n\x08receiver\x18\x02 \x01(\t\x12\x0e\n\x06\x61mount\x18\x03 \x01(\x05\" \n\x0e\x43ommitResponse\x12\x0e\n\x06status\x18\x01 \x01(\x08\"0\n\x0ePrepareRequest\x12\x12\n\nballot_num\x18\x01 \x01(\x05\x12\n\n\x02id\x18\x02 \x01(\x05\"\x92\x01\n\x0fPromiseResponse\x12\x12\n\nballot_num\x18\x01 \x01(\x05\x12\x11\n\tserver_id\x18\x02 \x01(\x05\x12\x12\n\naccept_num\x18\x03 \x01(\x05\x12 \n\naccept_val\x18\x04 \x03(\x0b\x32\x0c.Transaction\x12\"\n\x0ctransactions\x18\x05 \x03(\x0b\x32\x0c.Transaction2i\n\x05Paxos\x12\x32\n\x11HandleTransaction\x12\x0c.Transaction\x1a\x0f.CommitResponse\x12,\n\x07Prepare\x12\x0f.PrepareRequest\x1a\x10.PromiseResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'paxos_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
-  _globals['_COMMITRESPONSE']._serialized_start=15
-  _globals['_COMMITRESPONSE']._serialized_end=47
-  _globals['_TRANSACTION']._serialized_start=49
-  _globals['_TRANSACTION']._serialized_end=112
-  _globals['_PAXOS']._serialized_start=114
-  _globals['_PAXOS']._serialized_end=173
+  _globals['_TRANSACTION']._serialized_start=15
+  _globals['_TRANSACTION']._serialized_end=78
+  _globals['_COMMITRESPONSE']._serialized_start=80
+  _globals['_COMMITRESPONSE']._serialized_end=112
+  _globals['_PREPAREREQUEST']._serialized_start=114
+  _globals['_PREPAREREQUEST']._serialized_end=162
+  _globals['_PROMISERESPONSE']._serialized_start=165
+  _globals['_PROMISERESPONSE']._serialized_end=311
+  _globals['_PAXOS']._serialized_start=313
+  _globals['_PAXOS']._serialized_end=418
 # @@protoc_insertion_point(module_scope)
