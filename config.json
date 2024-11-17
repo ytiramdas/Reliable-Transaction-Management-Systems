@@ -1,9 +1,0 @@
-{
-    "servers": [
-        {"id": 1, "port": 50051, "name":"A"},
-        {"id": 2, "port": 50052, "name":"B"},
-        {"id": 3, "port": 50053, "name":"C"},
-        {"id": 4, "port": 50054, "name":"D"},
-        {"id": 5, "port": 50055, "name":"E"}
-    ]
-}
