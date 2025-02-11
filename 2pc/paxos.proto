@@ -1,0 +1,151 @@
+syntax = "proto3";
+
+package paxos;
+
+service TransactionService {
+  rpc ProcessTransaction (TransactionRequest) returns (TransactionResponse);
+  rpc CrossShardPrepare (CrossShardPrepareRequest) returns (CrossShardPrepareResponse);
+  rpc CrossShardCommit (CrossShardCommitRequest) returns (CrossShardCommitResponse);
+  rpc SetActiveStatus(SetActiveStatusRequest) returns (SetActiveStatusResponse);
+  rpc SetContactStatus(SetContactStatusRequest) returns (SetContactStatusResponse);
+  rpc Prepare (PrepareMessage) returns (PromiseMessage);
+  rpc Accept (AcceptMessage) returns (AcceptedResponse);
+  rpc Commit (CommitMessage) returns (CommitResponse);
+  rpc Abort (AbortMessage) returns (AbortResponse);
+  rpc GetBalance (BalanceRequest) returns (BalanceResponse);
+  rpc GetDatastore (DatastoreRequest) returns (DatastoreResponse);
+}
+
+message TransactionRequest {
+  string sender = 1;
+  string receiver = 2;
+  int32 amount = 3;
+  int64 timestamp = 4;
+  string type = 5; // "intra" or "cross"
+  string sender_or_receiver = 6;
+}
+
+message TransactionResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message CrossShardPrepareRequest {
+  string sender = 1;
+  string receiver = 2;
+  int32 amount = 3;
+  int64 timestamp = 4;
+  string type = 5;
+  string sender_or_receiver = 6;
+}
+
+message CrossShardPrepareResponse {
+  bool success = 1;
+  string message = 2;
+  int32 ballot_number = 3;
+  int32 server_id = 4;
+}
+
+message CrossShardCommitRequest {
+  int32 ballot_number = 1;
+  int32 server_id = 2;
+  string sender = 3;
+  string receiver = 4;
+  int32 amount = 5;
+  int64 timestamp = 6;
+  string type = 7;
+  string sender_or_receiver = 8;
+  bool commit = 9;
+}
+
+message CrossShardCommitResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message SetActiveStatusRequest {
+  bool is_active = 1;
+}
+
+message SetActiveStatusResponse {
+  string message = 1;
+  bool success = 2;
+}
+
+message SetContactStatusRequest {
+  bool is_contact = 1;
+}
+
+message SetContactStatusResponse {
+  string message = 1;
+  bool success = 2;
+}
+
+message DatastoreItem {
+    int32 ballot_number = 1;
+    int32 server_id = 2;
+    TransactionRequest transaction = 3;
+    string message = 4;
+}
+
+message PrepareMessage {
+  int32 ballot_number = 1;
+  int32 server_id = 2;
+  TransactionRequest transaction = 3;
+  repeated DatastoreItem datastore_items = 4;
+}
+
+message PromiseMessage {
+  int32 ballot_number = 1;
+  int32 server_id = 2;
+  string message = 3;
+  bool success = 4;
+  repeated DatastoreItem datastore_items = 5;
+}
+
+message AcceptMessage {
+  int32 ballot_number = 1;
+  int32 server_id = 2;
+  TransactionRequest transaction = 3;
+}
+
+message AcceptedResponse {
+  int32 ballot_number = 1;
+  int32 server_id = 2;
+  bool success = 3;
+  string message = 4;
+}
+
+message CommitMessage {
+  int32 ballot_number = 1;
+  int32 server_id = 2;
+  TransactionRequest transaction = 3;
+}
+
+message CommitResponse {
+  bool success = 3;
+  string message = 4;
+}
+
+message AbortMessage {
+  int32 ballot_number = 1;
+  int32 server_id = 2;
+  TransactionRequest transaction = 3;
+}
+
+message AbortResponse {}
+
+message BalanceRequest {
+  int32 client_id = 1;
+}
+
+message BalanceResponse {
+  int32 client_id = 1;
+  int32 balance = 2;
+}
+
+message DatastoreRequest {}
+
+message DatastoreResponse {
+  repeated DatastoreItem transactions = 1;
+}
