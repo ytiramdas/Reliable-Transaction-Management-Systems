@@ -1,0 +1,9 @@
+{
+    "servers": [
+        {"id": 1, "port": 50051, "name":"S1"},
+        {"id": 2, "port": 50052, "name":"S2"},
+        {"id": 3, "port": 50053, "name":"S3"},
+        {"id": 4, "port": 50054, "name":"S4"},
+        {"id": 5, "port": 50055, "name":"S5"}
+    ]
+}

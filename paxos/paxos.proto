@@ -1,0 +1,110 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+service Paxos {
+    rpc SetActiveStatus(SetActiveStatusRequest) returns (SetActiveStatusResponse);
+    rpc HandleTransaction(Transaction) returns (CommitResponse);
+    rpc Prepare(PrepareRequest) returns (PromiseResponse);
+    rpc Accept(AcceptRequest) returns (AcceptedResponse);
+    rpc Commit(CommitRequest) returns (CommitResponse);
+    rpc PrintBalance(PrintBalanceRequest) returns (PrintResponse);
+    rpc PrintLog(PrintLogRequest) returns (PrintResponse);
+    rpc PrintDB(PrintDBRequest) returns (PrintResponse);
+    rpc Synchronize(SynchronizeRequest) returns (SynchronizeResponse);
+    rpc Performance(PerformanceRequest) returns (PerformanceResponse);
+    rpc GetCurrentBalance(GetCurrentBalanceRequest) returns (GetCurrentBalanceResponse);
+}
+
+message PrintBalanceRequest {}
+
+message PrintLogRequest {}
+
+message PrintDBRequest {}
+
+message PrintResponse {
+    bool response = 1;
+}
+
+message SynchronizeRequest {
+    repeated MajorBlock committed_log = 1;
+    int32 last_committed_ballot_num = 2;
+}
+
+message SynchronizeResponse {
+    repeated MajorBlock committed_log = 1;
+}
+
+message GetCurrentBalanceRequest {}
+
+message GetCurrentBalanceResponse {
+    int32 balance = 1;
+    repeated Transaction local_logs = 2;
+}
+
+message PerformanceRequest {}
+
+message PerformanceResponse {
+    double transaction_throughput = 1;
+    double average_transaction_latency = 2;
+    int32 leader_election_count = 3;
+    double average_leader_election_time = 4;
+    int32 rpc_call_count = 5;
+    double average_rpc_time = 6;
+}
+
+message Transaction {
+    string sender = 1;
+    string receiver = 2;
+    int32 amount = 3;
+    google.protobuf.Timestamp timestamp = 4;
+}
+
+message CommitRequest {
+    int32 ballot_num = 1;
+    int32 server_id = 2;
+    MajorBlock major_block = 3;
+}
+
+message CommitResponse {
+    bool status = 1;
+}
+
+message PrepareRequest {
+    int32 ballot_num = 1;
+    int32 id = 2;
+}
+
+message PromiseResponse {
+    int32 ballot_num = 1;
+    int32 server_id = 2;
+    int32 accept_num = 3;
+    repeated Transaction accept_val = 4;
+    repeated Transaction transactions = 5;
+}
+
+message SetActiveStatusRequest {
+    bool is_active = 1;
+}
+
+message SetActiveStatusResponse {
+    bool success = 1;
+}
+
+message MajorBlock {
+    int32 ballot_num = 1;
+    int32 server_id = 2;
+    repeated Transaction transactions = 3;
+}
+
+message AcceptRequest {
+    int32 ballot_num = 1;
+    int32 server_id = 2;
+    MajorBlock major_block = 3;
+}
+
+message AcceptedResponse {
+    int32 ballot_num = 1;
+    int32 server_id = 2;
+    MajorBlock major_block = 3;
+}
