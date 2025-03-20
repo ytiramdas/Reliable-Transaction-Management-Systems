@@ -1,0 +1,23 @@
+{
+    "servers": [
+        {"id": 1, "public_key": "keys/servers/server1/public_key.pem"},
+        {"id": 2, "public_key": "keys/servers/server2/public_key.pem"},
+        {"id": 3, "public_key": "keys/servers/server3/public_key.pem"},
+        {"id": 4, "public_key": "keys/servers/server4/public_key.pem"},
+        {"id": 5, "public_key": "keys/servers/server5/public_key.pem"},
+        {"id": 6, "public_key": "keys/servers/server6/public_key.pem"},
+        {"id": 7, "public_key": "keys/servers/server7/public_key.pem"}
+    ],
+    "clients": [
+        {"id": 1, "public_key": "keys/clients/client1/public_key.pem"},
+        {"id": 2, "public_key": "keys/clients/client2/public_key.pem"},
+        {"id": 3, "public_key": "keys/clients/client3/public_key.pem"},
+        {"id": 4, "public_key": "keys/clients/client4/public_key.pem"},
+        {"id": 5, "public_key": "keys/clients/client5/public_key.pem"},
+        {"id": 6, "public_key": "keys/clients/client6/public_key.pem"},
+        {"id": 7, "public_key": "keys/clients/client7/public_key.pem"},
+        {"id": 8, "public_key": "keys/clients/client8/public_key.pem"},
+        {"id": 9, "public_key": "keys/clients/client9/public_key.pem"},
+        {"id": 10, "public_key": "keys/clients/client10/public_key.pem"}
+    ]
+}

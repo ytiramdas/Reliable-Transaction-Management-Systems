@@ -1,0 +1,23 @@
+{
+    "servers": [
+        {"id": 1, "port": 50051, "name":"S1"},
+        {"id": 2, "port": 50052, "name":"S2"},
+        {"id": 3, "port": 50053, "name":"S3"},
+        {"id": 4, "port": 50054, "name":"S4"},
+        {"id": 5, "port": 50055, "name":"S5"},
+        {"id": 6, "port": 50056, "name":"S6"},
+        {"id": 7, "port": 50057, "name":"S7"}
+    ],
+    "clients": [
+        {"id": 1, "port": 50061, "name":"A"},
+        {"id": 2, "port": 50062, "name":"B"},
+        {"id": 3, "port": 50063, "name":"C"},
+        {"id": 4, "port": 50064, "name":"D"},
+        {"id": 5, "port": 50065, "name":"E"},
+        {"id": 6, "port": 50066, "name":"F"},
+        {"id": 7, "port": 50067, "name":"G"},
+        {"id": 8, "port": 50068, "name":"H"},
+        {"id": 9, "port": 50069, "name":"I"},
+        {"id": 10, "port": 50070, "name":"J"}
+    ]
+}

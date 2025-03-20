@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package pbft;
+
+service ControllerService {
+    rpc HandleTransaction (TransactionRequest) returns (TransactionResponse);
+    rpc HandleReply (ReplyMessage) returns (ReplyResponse);   
+}
+
+message TransactionRequest {
+    string sender = 1;
+    string receiver = 2;
+    int32 amount = 3;
+}
+
+message TransactionResponse {
+    bool success = 1;
+    string message = 2;
+}
+
+message ReplyMessage {
+    int32 view = 1;
+    int32 sequence_number = 2;
+    int32 client_id = 3;
+    int32 replica_id = 4;
+    string result = 5;
+    bytes signature = 6;
+    bool status = 7;
+}
+
+message ReplyResponse {
+    bool success = 1;
+    string message = 2;
+}

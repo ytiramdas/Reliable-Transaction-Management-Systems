@@ -1,0 +1,117 @@
+syntax = "proto3";
+
+enum RequestType {
+    PREPREPARE = 0;
+    PREPARE = 1;
+    COMMIT = 2;
+}
+
+service PBFTService {
+  rpc SendTransaction(Transaction) returns (TransactionStatus);
+  rpc PrePrepare(PrePrepareMessage) returns (PrepareResponse);
+  rpc Prepare(PreparedMessage) returns (CommitResponse);
+  rpc Commit(CommittedMessage) returns (CommittedResponse);
+  rpc SetActiveStatus(SetActiveStatusRequest) returns (SetActiveStatusResponse);
+  rpc SetByzantineStatus(SetByzantineStatusRequest) returns (SetByzantineStatusResponse);
+  rpc PrintLog(PrintLogRequest) returns (PrintResponse);
+  rpc PrintDB(PrintDBRequest) returns (PrintResponse);
+  rpc PrintStatus(PrintStatusRequest) returns (PrintResponse);
+  rpc Reset(ResetRequest) returns (ResetResponse);
+}
+
+message PrintLogRequest {}
+
+message PrintDBRequest {}
+
+message PrintStatusRequest {
+  int32 sequence_number = 1;
+}
+
+message PrintResponse {
+    bool response = 1;
+}
+
+message ResetRequest {}
+
+message ResetResponse {
+  bool success = 1;
+}
+
+message Transaction {
+  int32 client_id = 1;
+  string sender = 2;
+  string receiver = 3;
+  int32 amount = 4;
+  bytes signature = 5;
+  int64 timestamp = 6;
+}
+
+message TransactionStatus {
+  string message = 1;
+  bool success = 2;
+  int32 view_number = 3;
+}
+
+message PrePrepareMessage {
+  int32 view = 1;
+  int32 sequence_number = 2;
+  string digest = 3;
+  bytes signature = 4;
+  Transaction transaction = 5;
+  RequestType request_type = 6;
+}
+
+message PrepareResponse {
+  int32 view = 1;
+  int32 sequence_number = 2;
+  string digest = 3;
+  int32 replica_id = 4;
+  bytes signature = 5;
+  RequestType request_type = 6;
+  string message = 7;
+  bool success = 8;
+}
+
+message PreparedMessage {
+  repeated PrepareResponse responses = 1;
+  int32 server_id = 2;
+}
+
+message CommitResponse {
+  int32 view = 1;
+  int32 sequence_number = 2;
+  string digest = 3;
+  int32 replica_id = 4;
+  bytes signature = 5;
+  RequestType request_type = 6;
+  string message = 7;
+  bool success = 8;
+}
+
+message CommittedMessage {
+    repeated CommitResponse responses = 1;
+    int32 server_id = 2;
+}
+
+message CommittedResponse {
+  string message = 1;
+  bool success = 2;
+}
+
+message SetActiveStatusRequest {
+  bool is_active = 1;
+}
+
+message SetActiveStatusResponse {
+  string message = 1;
+  bool success = 2;
+}
+
+message SetByzantineStatusRequest {
+  bool is_byzantine = 1;
+}
+
+message SetByzantineStatusResponse {
+  string message = 1;
+  bool success = 2;
+}
